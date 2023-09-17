@@ -1,0 +1,14 @@
+---
+collections:
+  - name: containers.podman
+
+  - name: community.general
+
+  - name: ansible.posix
+
+  - name: chocolatey.chocolatey
+
+  - name: ansible.windows
+  
+  - name: /build/tmichett-gls_collection_demo-1.0.1.tar.gz
+    type: file

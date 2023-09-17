@@ -1,0 +1,31 @@
+---
+- name: Playbook to Configure Controller with a Project-Based inventory Source for the Job Template Workflow Demo
+  hosts: localhost
+  tasks:
+
+    - name: Create DO374 Inventory
+      ansible.controller.inventory:
+        name: "DO374 Web Workflow"
+        organization: "DO374_Demo"
+        state: "present"
+        controller_username: admin
+        controller_password: redhat
+        controller_host: https://controller.lab.example.com
+        validate_certs: false
+
+
+
+    - name: Create DO374 Project Inventory -  Source
+      ansible.controller.inventory_source:
+        name: "DO374 Project Inventory"
+        organization: "DO374_Demo"
+        inventory: "DO374 Web Workflow"
+        source_project: "DO374_Demo_Project"
+        source: scm
+        source_path: "Demos/CH3/Controller/inventory"
+        update_on_launch: True
+        state: "present"
+        controller_username: admin
+        controller_password: redhat
+        controller_host: https://controller.lab.example.com
+        validate_certs: false

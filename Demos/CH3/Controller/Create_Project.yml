@@ -1,0 +1,21 @@
+---
+- name: Create Project
+  hosts: localhost
+
+  tasks:
+
+    - name: Create Demo Project
+      ansible.controller.project:
+        name: "DO374_Demo_Project"
+        description: "DO374 Demo Project for "
+        organization: DO374_Demo 
+        scm_update_on_launch: true
+        scm_url: https://github.com/tmichett/do374.git
+        scm_type: git
+        scm_branch: main
+        # credential: Travis GH PAT Credential
+        controller_username: admin
+        controller_password: redhat
+        controller_host: https://controller.lab.example.com
+        validate_certs: false
+        state: present
