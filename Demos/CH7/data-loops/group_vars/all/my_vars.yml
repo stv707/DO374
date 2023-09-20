@@ -1,0 +1,53 @@
+#### Group variables ####
+rgroups:
+  accounts:
+    name: accounts
+    gid: 7001
+  development:
+    name: development
+    gid: 7002
+  manufacturing:
+    name: manufacturing
+    gid: 7003
+  marketing:
+    name: marketing
+    gid: 7004
+
+#### User variables ####
+my_users:
+  john:
+    name: john
+    my_groups:
+      - accounts
+      - development
+  jane:
+    name: jane
+    my_groups:
+      - manufacturing
+      - marketing
+  tom:
+    name: tom
+    my_groups:
+      - accounts
+      - marketing
+  lisa:
+    name: lisa
+    my_groups:
+      - development
+      - manufacturing
+
+#### Public key variables ####
+public_key_lists:
+  - username: john
+    public_keys:
+      - pubkeys/john/id_rsa.pub
+      - pubkeys/john/laptop_rsa.pub
+  - username: jane
+    public_keys:
+      - pubkeys/jane/id_rsa.pub
+  - username: tom
+    public_keys:
+      - pubkeys/tom/id_rsa.pub
+  - username: lisa
+    public_keys:
+      - pubkeys/lisa/id_rsa.pub

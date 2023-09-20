@@ -1,0 +1,33 @@
+- name: Populate users and groups
+  hosts: proxy
+  gather_facts: false
+  become: true
+  tasks:
+
+    - name: Load group information
+      ansible.builtin.set_fact:
+        user_groups: "{{ lookup('ansible.builtin.file', 'groups.yml') | from_yaml }}"
+
+    - name: Create groups
+      ansible.builtin.group:
+        name: "{{ item['name'] }}"
+        state: present
+      loop: "{{ user_groups }}"
+
+    - name: Create users
+      vars:
+        password_plain: "{{ lookup('ansible.builtin.password', 'credentials/' + item + ' length=9') }}"
+      ansible.builtin.user:
+        name: "{{ item }}"
+        password: "{{ password_plain | password_hash('sha512') }}"
+        update_password: on_create
+        state: present
+      loop: "{{ query('ansible.builtin.lines', 'cat users.txt') }}"
+
+    - name: Add users to groups
+      ansible.builtin.user:
+        name: '{{ item[1] }}'
+        groups: "{{ item[0]['name'] }}"
+        append: true
+      loop: "{{ user_groups | subelements('members', 'skip_missing=true') }}"
+

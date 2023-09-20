@@ -1,0 +1,12 @@
+- name: Demo
+  hosts: localhost
+  gather_facts: False
+  vars:
+    pwd_alias: "{{ lookup('ansible.builtin.password', 'secstore.txt length=9 chars=ascii_letters') }}"
+  tasks:
+    - set_fact:
+        my_pass: "{{ pwd_alias }}"
+    - debug:
+        msg: "Plain Generated Pass: {{ my_pass }}"
+    - debug:
+        msg: "Hashed Password: {{ my_pass | password_hash('sha512') }}"

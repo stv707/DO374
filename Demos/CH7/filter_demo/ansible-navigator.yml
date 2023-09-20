@@ -1,0 +1,50 @@
+---
+ansible-navigator:
+  ansible:
+    config:
+      help: false
+    doc:
+      help: false
+      plugin:
+        type: module
+    inventory:
+      help: false
+    playbook:
+      help: false
+  ansible-builder:
+    help: false
+    workdir: /home/student
+  app: settings
+  collection-doc-cache-path: /home/student/.cache/ansible-navigator/collection_doc_cache.db
+  color:
+    enable: true
+    osc4: true
+  editor:
+    command: vi +{line_number} {filename}
+    console: true
+  exec:
+    command: /bin/bash
+    shell: true
+  execution-environment:
+    container-engine: podman
+    enabled: true
+    image: hub.lab.example.com/ee-supported-rhel8:latest
+    pull:
+      policy: missing
+  images:
+    details:
+    - everything
+  logging:
+    append: true
+    file: /dev/null
+    level: warning
+  mode: stdout
+  playbook-artifact:
+    enable: false
+    save-as: '{playbook_dir}/{playbook_name}-artifact-{time_stamp}.json'
+  settings:
+    effective: true
+    sample: false
+    schema: json
+    sources: false
+  time-zone: UTC

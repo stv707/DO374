@@ -1,0 +1,12 @@
+---
+- name: Playbook to test Ansible Navigator
+  hosts: servera.lab.example.com
+  tasks:
+
+    - name: Displaying Host Output
+      debug:
+        msg:
+         - "item: {{ item }}" 
+         - "name: {{ item[0]['name'] }}"
+         - "group: {{ item[1] }}"
+      loop: "{{ my_users | subelements('my_groups') }}"

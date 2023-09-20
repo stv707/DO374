@@ -1,0 +1,15 @@
+---
+- name: Default filter examples
+  hosts: localhost
+  vars_files: user_list.yml
+  tasks:
+    - name: Default filter examples
+      ansible.builtin.debug:
+        msg: 
+         - "FNAME: {{ item['fname'] }}"
+         - "LNAME: {{ item['lname'] }}"
+         - "SHELL: {{ item['shell'] | default('/bin/bash')}}"
+         - "GROUP: {{ item['groups']| default(omit) }}"
+
+
+      loop: "{{ userx }}" 

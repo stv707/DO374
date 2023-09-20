@@ -1,0 +1,13 @@
+---
+userx:
+  - fname: sam
+    lname: raggi
+    shell: /bin/bash
+    groups: accg
+  - fname: ken
+    lname: winston
+    groups: hrg
+  - fname: ryu
+    lname: chen
+  - fname: bob
+    lname: marley

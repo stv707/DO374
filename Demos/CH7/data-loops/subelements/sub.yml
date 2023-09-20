@@ -1,0 +1,28 @@
+---
+- name: Loop and Subelements Example
+  hosts: localhost
+  gather_facts: False
+  vars:
+    users:
+      - name: alice
+        groups:
+          - name: accg
+            permissions:
+              - read
+              - write
+              - execute
+          - name: users
+            permissions:
+              - read
+              - write
+      - name: bob
+        groups:
+          - name: hrg
+            permissions:
+              - read
+  tasks:
+    - name: Display user information
+      debug:
+        msg: "User {{ item.0.name }} is in the {{ item.1.name }} group with the following permissions: {{ item.1.permissions | join(', ') }}"
+      loop: "{{ users | subelements('groups') }}"
+

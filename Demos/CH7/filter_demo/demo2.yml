@@ -1,0 +1,42 @@
+---
+- name: Var filter examples
+  hosts: localhost
+  vars_files:
+    - user_list2.yml
+  tasks:
+    - name: Text filter examples
+      ansible.builtin.debug:
+        msg:  
+         - Name: "{{ item['fname'] | default('Name is undefined') | capitalize }}"
+         - Shell: "{{ item['shell'] | default('Shell is undefined') }}"
+         - Groups: "{{ item['groups'] | default('Groups are undefined') }}"
+      loop: "{{ userx }}"
+
+    - name: Text formating example
+      ansible.builtin.debug:
+        msg: "First name: {{ item['fname'] | capitalize  }}" 
+      loop: "{{ userx }}" 
+
+    - name: Text combine example
+      ansible.builtin.debug:
+        msg: "Full Name: {{  item['fname'] | capitalize }} {{  item['lname'] | capitalize  }} " 
+      loop: "{{ userx }}" 
+
+    - name: Text hash example
+      ansible.builtin.debug:
+        msg:  
+         - "Hashed Password: {{ item['pass'] | hash('sha1') }}" 
+         - "Hashed Password in Sha512: {{ item['pass'] | password_hash('sha512') }}" 
+         - "Original Pass: {{ item['pass'] }}" 
+      loop: "{{ userx }}" 
+
+    - name: The 'unique' filter
+      ansible.builtin.debug:
+        msg:  
+         - "{{ [ 1, 1, 2, 2, 2, 3, 4, 4 ] | unique }}" 
+
+    - name: The 'length & first order' filter
+      ansible.builtin.debug:
+        msg:  
+         - "{{ [ 1, 2, 3,  4 ] | length }}" 
+         - "{{ [ 1, 2, 3,  4 ] | first }}" 

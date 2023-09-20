@@ -1,0 +1,12 @@
+- name: Third task
+  hosts: servera.lab.example.com
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Set up authorized keys
+      ansible.posix.authorized_key:
+        user: developer
+        state: present
+        key: "{{ lookup('ansible.builtin.file', item) }}"
+      loop: "{{ public_key_lists | map(attribute='public_keys') | flatten }}"

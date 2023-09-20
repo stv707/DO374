@@ -1,0 +1,10 @@
+---
+- name: devs
+  members:
+    - user1
+    - user2
+- name: ops
+  members:
+    - user3
+    - user4
+    - user5 
